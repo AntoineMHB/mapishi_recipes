@@ -1,4 +1,4 @@
-import { Heart, Link, ShoppingCart } from "lucide-react";
+import { Link } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,

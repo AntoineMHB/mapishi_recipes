@@ -12,7 +12,14 @@ import { SearchField } from "./ui/searchField";
 export const TopNavBar = () => {
   return (
     <div className="flex items-center justify-between px-5 py-5 space-x-4 shadow-sm">
-      <p className="text-2xl text-black font-bold">Zando_Express</p>
+      {/* Logo */}
+      <div className="w-[100px] sm:w-[130px] md:w-[150px]">
+        <img
+          src="/src/assets/logo_mapishi.png"
+          alt="Logo"
+          className="w-full h-auto object-contain"
+        />
+      </div>
       <div className="flex justify-center items-center gap-4">
         <NavigationMenu>
           <NavigationMenuList>

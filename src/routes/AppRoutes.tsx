@@ -1,6 +1,6 @@
-import { LoginForm } from "@/components/login-form";
-import { SignupForm } from "@/components/signup-form";
 import Home from "@/pages/Home";
+import { LoginPage } from "@/pages/LoginPage";
+import { SignupPage } from "@/pages/SignupPage";
 import { Route, Routes } from "react-router-dom";
 
 export const AppRoutes = () => {
@@ -8,8 +8,8 @@ export const AppRoutes = () => {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/signup" element={<SignupForm />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Routes>
     </div>
   );

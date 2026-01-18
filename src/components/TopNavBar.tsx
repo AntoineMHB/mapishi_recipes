@@ -1,4 +1,3 @@
-import { Link } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,7 +6,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "./ui/navigation-menu";
-import { SearchField } from "./ui/searchField";
+
+import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 export const TopNavBar = () => {
   return (
@@ -24,19 +25,34 @@ export const TopNavBar = () => {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <Link to={"/categories"}>
-                  <NavigationMenuLink>
-                    All products categories
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuContent>
+              {/* Button */}
+              <div>
+                <Button
+                  className="text-white text-sm sm:text-base rounded-xl sm:rounded-[10px] h-8 sm:h-9 md:h-10 w-[110px] sm:w-[130px] md:w-[150px] bg-[#FF9A0E] shadow-md hover:bg-[#ff8800] transition"
+                  // onClick={onOpen}
+                >
+                  Add Meal
+                </Button>
+              </div>
             </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <SearchField />
-            </NavigationMenuItem>
+            <NavigationMenuItem>{/* <SearchField /> */}</NavigationMenuItem>
+
+            <div className="flex gap-5 mx-2">
+              <Link to={"/login"} className="font-semibold hover:font-bold">
+                Sign In
+              </Link>
+              <Link to={"/signup"} className="font-semibold hover:font-bold">
+                Sign Up
+              </Link>
+
+              <button
+                // onClick={handleLogout}
+                className="font-semibold hover:font-bold"
+              >
+                Logout
+              </button>
+            </div>
           </NavigationMenuList>
         </NavigationMenu>
 

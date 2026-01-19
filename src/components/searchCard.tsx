@@ -1,19 +1,41 @@
 "use client";
 
+import { useAppDispatch } from "@/app/hooks";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { clearSearch } from "@/features/auth/recipes/recipeSlice";
+import {
+  fetchRecipes,
+  searchRecipes,
+} from "@/features/auth/recipes/recipeThunks";
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-interface SearchCardProps {
-  onSearch: (query: string) => void;
-}
+export default function SearchCard() {
+  const dispatch = useAppDispatch();
+  const [query, setQuery] = useState("");
 
-export default function SearchCard({ onSearch }: SearchCardProps) {
-  const [searchTerm, setSearchTerm] = useState("");
+  useEffect(() => {
+    if (!query.trim()) {
+      dispatch(clearSearch());
+      dispatch(fetchRecipes());
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      dispatch(searchRecipes(query));
+    }, 400);
+
+    return () => clearTimeout(timeout);
+  }, [query, dispatch]);
 
   const handleSearch = () => {
-    onSearch(searchTerm.trim());
+    if (!query.trim()) return;
+    dispatch(searchRecipes(query));
+
+    if (!query.trim()) {
+      dispatch(clearSearch());
+    }
   };
   return (
     <div>
@@ -45,10 +67,15 @@ export default function SearchCard({ onSearch }: SearchCardProps) {
             <Search size={20} color="#F17228" className="shrink-0" />
             <input
               type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="What do you like to eat today?"
               className="text-[#9E9E9E] text-[15px] leading-[100%] pl-2 focus:outline-none  truncate w-full h-full"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
             />
           </div>
 

@@ -5,14 +5,7 @@ import { TopNavBar } from "@/components/TopNavBar";
 import { useState } from "react";
 
 export default function Home() {
-  //   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const handleSearch = (query: string) => {
-    console.log("Search query received:", query);
-    setSearchQuery(query);
-  };
 
   return (
     <div>
@@ -21,7 +14,7 @@ export default function Home() {
       <div
         className={`w-full min-h-screen flex flex-col items-center bg-[#FFF8F0] pb-10 ${isOpen ? "blur-sm pointer-events-none" : ""}`}
       >
-        <Header onSearch={handleSearch} />
+        <Header />
 
         <Recipes />
       </div>

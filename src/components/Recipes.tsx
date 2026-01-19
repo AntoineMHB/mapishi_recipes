@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
 import { Card } from "./ui/card";
 import { fetchRecipes } from "@/features/auth/recipes/recipeThunks";
 import Rating from "@mui/material/Rating";

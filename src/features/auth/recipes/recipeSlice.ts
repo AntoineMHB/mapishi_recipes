@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import reducer from "../authSlice";
 import type { Recipe } from "./recipesTypes";
 import { fetchRecipes, searchRecipes } from "./recipeThunks";
 

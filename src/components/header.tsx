@@ -1,12 +1,6 @@
 import SearchCard from "./searchCard";
 
-interface HeaderProps {
-  onSearch: (query: string) => void;
-}
-
-export default function Header({ onSearch }: HeaderProps) {
-  // const [searchQuery, setSearchQuery] = useState("");
-
+export default function Header() {
   return (
     <div className="w-full bg-[#FFB30E] flex flex-col lg:flex-row items-start lg:items-center">
       {/* Left Section: Text + OrderCard */}
@@ -20,7 +14,7 @@ export default function Header({ onSearch }: HeaderProps) {
         </p>
 
         <div className="w-full">
-          <SearchCard onSearch={onSearch} />
+          <SearchCard />
         </div>
       </div>
 

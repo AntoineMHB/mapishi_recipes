@@ -1,4 +1,5 @@
 import Header from "@/components/header";
+import { Recipes } from "@/components/Recipes";
 import { TopNavBar } from "@/components/TopNavBar";
 import { useState } from "react";
 
@@ -19,6 +20,7 @@ export default function Home() {
         <Header onSearch={handleSearch} />
         {/* <FeaturedFoods searchQuery={searchQuery} /> */}
         {/* <Footer /> */}
+        <Recipes />
       </div>
 
       {/* Popup Form (only when open) */}

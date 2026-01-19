@@ -10,7 +10,7 @@ export type Recipe = {
   cuisine: string;
   caloriesPerServing: number;
   tags: string[];
-  userId: number;
+
   image: string;
   rating: number;
   reviewCount: number;
@@ -23,3 +23,5 @@ export type RecipesResponse = {
   skip: number;
   limit: number;
 };
+
+export type CreateRecipe = Omit<Recipe, "id">;

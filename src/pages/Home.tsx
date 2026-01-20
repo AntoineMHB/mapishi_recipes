@@ -1,13 +1,29 @@
 import { useAppSelector } from "@/app/hooks";
 import AddRecipeForm from "@/components/AddRecipeForm";
+import EditRecipeForm from "@/components/EditRecipeForm";
+
 import Header from "@/components/header";
 import { Recipes } from "@/components/Recipes";
 import { TopNavBar } from "@/components/TopNavBar";
+
+import type { Recipe } from "@/features/auth/recipes/recipesTypes";
 import { useState } from "react";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { items } = useAppSelector((state) => state.recipes);
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  const handleOpenEdit = (recipe: Recipe) => {
+    setSelectedRecipe(recipe);
+    setIsEditMode(true);
+  };
+
+  const handleClose = () => {
+    setSelectedRecipe(null);
+    setIsEditMode(false);
+  };
 
   return (
     <div>
@@ -18,7 +34,7 @@ export default function Home() {
       >
         <Header />
 
-        <Recipes recipes={items} />
+        <Recipes recipes={items} onOpenEdit={handleOpenEdit} />
       </div>
 
       {isOpen && (
@@ -30,6 +46,10 @@ export default function Home() {
             <AddRecipeForm onClose={() => setIsOpen(false)} />
           </div>
         </div>
+      )}
+
+      {selectedRecipe && isEditMode && (
+        <EditRecipeForm recipe={selectedRecipe} onClose={handleClose} />
       )}
     </div>
   );

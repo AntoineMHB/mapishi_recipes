@@ -4,16 +4,17 @@ import { Card } from "./ui/card";
 import { fetchRecipes } from "@/features/auth/recipes/recipeThunks";
 import Rating from "@mui/material/Rating";
 import { ClockIcon, Trash2Icon } from "lucide-react";
-import { Link } from "react-router-dom";
+
 import { useDeleteRecipeMutation } from "@/features/auth/recipes/recipesApi";
 import { toast } from "react-toastify";
 import type { Recipe } from "@/features/auth/recipes/recipesTypes";
 
 type RecipesProps = {
   recipes: Recipe[];
+  onOpenEdit: (recipe: Recipe) => void;
 };
 
-export const Recipes = ({ recipes }: RecipesProps) => {
+export const Recipes = ({ onOpenEdit }: RecipesProps) => {
   const dispatch = useAppDispatch();
   const { items, loading, error } = useAppSelector((state) => state.recipes);
   const isLoggedIn = useAppSelector((state) => !!state.auth.user);
@@ -68,12 +69,12 @@ export const Recipes = ({ recipes }: RecipesProps) => {
 
           {isLoggedIn && (
             <div className="flex justify-between items-center ">
-              <Link
-                to={"/edit"}
+              <button
                 className="text-orange-600 underline font-bold"
+                onClick={() => onOpenEdit(recipe)}
               >
                 Edit
-              </Link>
+              </button>
 
               <button
                 onClick={() => handleDelete(recipe.id)}

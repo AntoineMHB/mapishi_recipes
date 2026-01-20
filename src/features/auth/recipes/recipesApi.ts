@@ -22,7 +22,22 @@ export const recipesApi = createApi({
       }),
       invalidatesTags: ["Recipes"],
     }),
+
+    updateRecipe: builder.mutation<
+      Recipe,
+      { id: number; data: Partial<Recipe> }
+    >({
+      query: ({ id, data }) => ({
+        url: `recipes/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useAddRecipeMutation, useDeleteRecipeMutation } = recipesApi;
+export const {
+  useAddRecipeMutation,
+  useDeleteRecipeMutation,
+  useUpdateRecipeMutation,
+} = recipesApi;

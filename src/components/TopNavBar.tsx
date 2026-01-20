@@ -7,6 +7,7 @@ import {
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "@/app/hooks";
+import logo from "@/assets/logo_mapishi.png";
 
 interface OpenFormButtonProps {
   onOpen: () => void;
@@ -19,11 +20,7 @@ export const TopNavBar = ({ onOpen }: OpenFormButtonProps) => {
     <div className="flex items-center justify-between px-5 py-5 space-x-4 shadow-sm">
       {/* Logo */}
       <div className="w-[100px] sm:w-[130px] md:w-[150px]">
-        <img
-          src="/src/assets/logo_mapishi.png"
-          alt="Logo"
-          className="w-full h-auto object-contain"
-        />
+        <img src={logo} alt="Logo" className="w-full h-auto object-contain" />
       </div>
       <div className="flex justify-center items-center gap-4">
         <NavigationMenu>

@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/app/hooks";
 import AddRecipeForm from "@/components/AddRecipeForm";
 import Header from "@/components/header";
 import { Recipes } from "@/components/Recipes";
@@ -6,6 +7,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { items } = useAppSelector((state) => state.recipes);
 
   return (
     <div>
@@ -16,7 +18,7 @@ export default function Home() {
       >
         <Header />
 
-        <Recipes />
+        <Recipes recipes={items} />
       </div>
 
       {isOpen && (

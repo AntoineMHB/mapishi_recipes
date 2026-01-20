@@ -5,11 +5,19 @@ import { fetchRecipes } from "@/features/auth/recipes/recipeThunks";
 import Rating from "@mui/material/Rating";
 import { ClockIcon, Trash2Icon } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useDeleteRecipeMutation } from "@/features/auth/recipes/recipesApi";
+import { toast } from "react-toastify";
+import type { Recipe } from "@/features/auth/recipes/recipesTypes";
 
-export const Recipes = () => {
+type RecipesProps = {
+  recipes: Recipe[];
+};
+
+export const Recipes = ({ recipes }: RecipesProps) => {
   const dispatch = useAppDispatch();
   const { items, loading, error } = useAppSelector((state) => state.recipes);
   const isLoggedIn = useAppSelector((state) => !!state.auth.user);
+  const [deleteRecipe, { isLoading }] = useDeleteRecipeMutation();
 
   useEffect(() => {
     dispatch(fetchRecipes());
@@ -21,6 +29,15 @@ export const Recipes = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  const handleDelete = async (id: number) => {
+    try {
+      await deleteRecipe(id).unwrap();
+      toast.success("Recipe deleted successfully");
+    } catch (error) {
+      toast.error("Failed to delete recipe");
+    }
+  };
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-5 my-5">
@@ -58,7 +75,10 @@ export const Recipes = () => {
                 Edit
               </Link>
 
-              <button>
+              <button
+                onClick={() => handleDelete(recipe.id)}
+                disabled={isLoading}
+              >
                 <Trash2Icon className="w-5 h-5 text-red-600" />
               </button>
             </div>

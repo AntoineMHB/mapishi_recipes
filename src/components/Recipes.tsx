@@ -3,11 +3,13 @@ import { useEffect } from "react";
 import { Card } from "./ui/card";
 import { fetchRecipes } from "@/features/auth/recipes/recipeThunks";
 import Rating from "@mui/material/Rating";
-import { ClockIcon } from "lucide-react";
+import { ClockIcon, Trash2Icon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Recipes = () => {
   const dispatch = useAppDispatch();
   const { items, loading, error } = useAppSelector((state) => state.recipes);
+  const isLoggedIn = useAppSelector((state) => !!state.auth.user);
 
   useEffect(() => {
     dispatch(fetchRecipes());
@@ -29,10 +31,10 @@ export const Recipes = () => {
           </div>
 
           <h2 className="text-lg font-semibold mt-2">{recipe.name}</h2>
+
+          {/* <h2 className="text-lg font-semibold mt-2">{recipe.name}</h2> */}
           <div className="flex gap-5">
             <div className="flex gap-2">
-              {/* ⭐ */}
-
               <Rating
                 name="read-only"
                 value={recipe.rating}
@@ -46,6 +48,21 @@ export const Recipes = () => {
               {recipe.cookTimeMinutes} mins
             </div>
           </div>
+
+          {isLoggedIn && (
+            <div className="flex justify-between items-center ">
+              <Link
+                to={"/edit"}
+                className="text-orange-600 underline font-bold"
+              >
+                Edit
+              </Link>
+
+              <button>
+                <Trash2Icon className="w-5 h-5 text-red-600" />
+              </button>
+            </div>
+          )}
         </Card>
       ))}
     </div>

@@ -11,7 +11,11 @@ import {
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export default function SearchCard() {
+interface SearchCardProps {
+  onSearch?: (query: string) => void;
+}
+
+export default function SearchCard({ onSearch }: SearchCardProps) {
   const dispatch = useAppDispatch();
   const [query, setQuery] = useState("");
 
